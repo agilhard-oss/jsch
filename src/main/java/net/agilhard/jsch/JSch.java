@@ -290,7 +290,7 @@ public class JSch{
   /**
    * Sets the hostkey repository.
    *
-   * @param hkrepo
+   * @param hkrepo the host key repository
    *
    * @see net.agilhard.jsch.HostKeyRepository
    * @see net.agilhard.jsch.KnownHosts
@@ -436,6 +436,7 @@ public class JSch{
    * @param prvkey private key in byte array.
    * @param pubkey public key in byte array.
    * @param passphrase passphrase for <code>prvkey</code>.
+   * @throws JSchException on error
    *
    */
   public void addIdentity(String name, byte[]prvkey, byte[]pubkey, byte[] passphrase) throws JSchException{
@@ -485,6 +486,8 @@ public class JSch{
 
   /**
    * @deprecated use #removeIdentity(Identity identity)
+   * @param name the name
+   * @throws JSchException on error
    */
   public void removeIdentity(String name) throws JSchException{
     Vector identities = identityRepository.getIdentities();

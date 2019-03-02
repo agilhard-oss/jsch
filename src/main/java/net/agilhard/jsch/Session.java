@@ -1785,6 +1785,7 @@ break;
    * @param lport local port for local port forwarding 
    * @param host host address for local port forwarding
    * @param rport remote port number for local port forwarding
+   * @throws JSchException on error
    * @return an allocated local TCP port number
    * @see #setPortForwardingL(String bind_address, int lport, String host, int rport, ServerSocketFactory ssf, int connectTimeout)
    */
@@ -1802,6 +1803,7 @@ break;
    * @param lport local port for local port forwarding 
    * @param host host address for local port forwarding
    * @param rport remote port number for local port forwarding
+   * @throws JSchException on error
    * @return an allocated local TCP port number
    * @see #setPortForwardingL(String bind_address, int lport, String host, int rport, ServerSocketFactory ssf, int connectTimeout)
    */
@@ -1821,6 +1823,7 @@ break;
    * @param host host address for local port forwarding
    * @param rport remote port number for local port forwarding
    * @param ssf socket factory
+   * @throws JSchException on error
    * @return an allocated local TCP port number
    * @see #setPortForwardingL(String bind_address, int lport, String host, int rport, ServerSocketFactory ssf, int connectTimeout)
    */
@@ -1841,6 +1844,7 @@ break;
    * @param rport remote port number for local port forwarding
    * @param ssf socket factory
    * @param connectTimeout timeout for establishing port connection
+   * @throws JSchException on error
    * @return an allocated local TCP port number 
    */
   public int setPortForwardingL(String bind_address, int lport, String host, int rport, ServerSocketFactory ssf, int connectTimeout) throws JSchException{
@@ -1860,6 +1864,7 @@ break;
    * at local TCP port <code>lport</code> on loopback interface.
    *
    * @param lport local TCP port
+   * @throws JSchException on error
    */
   public void delPortForwardingL(int lport) throws JSchException{
     delPortForwardingL("127.0.0.1", lport);
@@ -1871,6 +1876,7 @@ break;
    *
    * @param bind_address bind_address of network interfaces
    * @param lport local TCP port
+   * @throws JSchException on error
    */
   public void delPortForwardingL(String bind_address, int lport) throws JSchException{
     PortWatcher.delPort(this, bind_address, lport);
@@ -1879,6 +1885,7 @@ break;
   /**
    * Lists the registered local port forwarding.
    *
+   * @throws JSchException on error
    * @return a list of "lport:host:hostport"
    */
   public String[] getPortForwardingL() throws JSchException{
@@ -1892,6 +1899,7 @@ break;
    * @param rport remote port
    * @param host host address
    * @param lport local port
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String host, int lport, SocketFactory sf)
    */
   public void setPortForwardingR(int rport, String host, int lport) throws JSchException{
@@ -1911,6 +1919,7 @@ break;
    * @param rport remote port
    * @param host host address
    * @param lport local port
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String host, int lport, SocketFactory sf)
    */
   public void setPortForwardingR(String bind_address, int rport, String host, int lport) throws JSchException{
@@ -1925,6 +1934,7 @@ break;
    * @param host host address
    * @param lport local port
    * @param sf socket factory
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String host, int lport, SocketFactory sf)
    */
   public void setPortForwardingR(int rport, String host, int lport, SocketFactory sf) throws JSchException{
@@ -1947,6 +1957,7 @@ break;
    * @param host host address
    * @param lport local port
    * @param sf socket factory
+   * @throws JSchException on error
    */
   public void setPortForwardingR(String bind_address, int rport, String host, int lport, SocketFactory sf) throws JSchException{
     int allocated=_setPortForwardingR(bind_address, rport);
@@ -1964,6 +1975,7 @@ break;
    *
    * @param rport remote port
    * @param daemon class name, which implements "ForwardedTCPIPDaemon"
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String daemon, Object[] arg)
    */
   public void setPortForwardingR(int rport, String daemon) throws JSchException{
@@ -1981,6 +1993,7 @@ break;
    * @param rport remote port
    * @param daemon class name, which implements "ForwardedTCPIPDaemon"
    * @param arg arguments for "daemon"
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String daemon, Object[] arg)
    */
   public void setPortForwardingR(int rport, String daemon, Object[] arg) throws JSchException{
@@ -2004,6 +2017,7 @@ break;
    * @param rport remote port
    * @param daemon class name, which implements "ForwardedTCPIPDaemon"
    * @param arg arguments for "daemon"
+   * @throws JSchException on error
    * @see #setPortForwardingR(String bind_address, int rport, String daemon, Object[] arg)
    */
   public void setPortForwardingR(String bind_address, int rport, String daemon, Object[] arg) throws JSchException{
@@ -2015,6 +2029,7 @@ break;
   /**
    * Lists the registered remote port forwarding.
    *
+   * @throws JSchException on error
    * @return a list of "rport:host:hostport"
    */
   public String[] getPortForwardingR() throws JSchException{
@@ -2032,6 +2047,8 @@ break;
    * The given argument may be "[bind_address:]port:host:hostport" or
    * "[bind_address:]port host:hostport", which is from LocalForward command of
    * ~/.ssh/config .
+   * @param conf the configuration
+   * @throws JSchException on error
    */
   private Forwarding parseForwarding(String conf) throws JSchException {
     String[] tmp = conf.split(" ");
@@ -2088,6 +2105,7 @@ break;
    * the listening port will be bound for local use only.
    *
    * @param conf configuration of local port forwarding
+   * @throws JSchException on error
    * @return an assigned port number
    * @see #setPortForwardingL(String bind_address, int lport, String host, int rport)
    */
@@ -2108,6 +2126,7 @@ break;
    * the TCP port will be allocated on the remote.
    *
    * @param conf configuration of remote port forwarding
+   * @throws JSchException on error
    * @return an allocated TCP port on the remote.
    * @see #setPortForwardingR(String bind_address, int rport, String host, int rport)
    */
@@ -2125,6 +2144,8 @@ break;
    *
    * @param host remote host, which the given stream will be plugged to.
    * @param port remote port, which the given stream will be plugged to.
+   * @throws JSchException on error
+   * @return a Channel
    */
   public Channel getStreamForwarder(String host, int port) throws JSchException {
     ChannelDirectTCPIP channel = new ChannelDirectTCPIP();
@@ -2203,6 +2224,7 @@ break;
    * Cancels the remote port forwarding assigned at remote TCP port <code>rport</code>.
    *
    * @param rport remote TCP port
+   * @throws JSchException on error
    */
   public void delPortForwardingR(int rport) throws JSchException{
     this.delPortForwardingR(null, rport);
@@ -2214,6 +2236,7 @@ break;
    * <code>bind_address</code>.
    *
    * @param bind_address bind address of the interface on the remote
+   * @throws JSchException on error
    * @param rport remote TCP port
    */
   public void delPortForwardingR(String bind_address, int rport) throws JSchException{
@@ -2411,6 +2434,7 @@ break;
    * is zero.
    *
    * @param interval the specified interval, in milliseconds.
+   * @throws JSchException on error
    * @see #getServerAliveInterval()
    */
   public void setServerAliveInterval(int interval) throws JSchException {
@@ -2419,9 +2443,9 @@ break;
   }
 
   /**
-   * Returns setting for the interval to send a keep-alive message.
    *
-   * @see #setServerAliveInterval(int)
+   * @see #setServerAliveInterval(int) 
+   * @return the setting for the interval to send a keep-alive message.
    */
   public int getServerAliveInterval(){
     return this.serverAliveInterval;
@@ -2441,9 +2465,9 @@ break;
   }
 
   /**
-   * Returns setting for the threshold to send keep-alive messages.
    *
    * @see #setServerAliveCountMax(int)
+   * @return the setting for the threshold to send keep-alive messages.
    */
   public int getServerAliveCountMax(){
     return this.serverAliveCountMax;
@@ -2583,7 +2607,7 @@ break;
    * Sets the identityRepository, which will be referred
    * in the public key authentication.  The default value is <code>null</code>.
    *
-   * @param identityRepository 
+   * @param identityRepository the identityRepository
    * @see #getIdentityRepository()
    */
   public void setIdentityRepository(IdentityRepository identityRepository){
@@ -2606,7 +2630,7 @@ break;
   /**
    * Sets the hostkeyRepository, which will be referred in checking host keys. 
    *
-   * @param hostkeyRepository 
+   * @param hostkeyRepository the hostkey Repository 
    * @see #getHostKeyRepository()
    */
   public void setHostKeyRepository(HostKeyRepository hostkeyRepository){
@@ -2619,6 +2643,7 @@ break;
    * JSch#getHostKeyRepository() will be invoked.
    *
    * @see JSch#getHostKeyRepository()
+   * @return the HostKeyRepository
    */
   public HostKeyRepository getHostKeyRepository(){
     if(hostkeyRepository == null)

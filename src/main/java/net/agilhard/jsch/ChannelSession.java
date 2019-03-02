@@ -56,7 +56,7 @@ class ChannelSession extends Channel{
   /**
    * Enable the agent forwarding.
    *
-   * @param enable
+   * @param enable flag
    */
   public void setAgentForwarding(boolean enable){ 
     agent_forwarding=enable;
@@ -66,7 +66,7 @@ class ChannelSession extends Channel{
    * Enable the X11 forwarding.
    * Refer to RFC4254 6.3.1. Requesting X11 Forwarding.
    *
-   * @param enable
+   * @param enable flag
    */
   public void setXForwarding(boolean enable){
     xforwading=enable; 
@@ -74,6 +74,7 @@ class ChannelSession extends Channel{
 
   /**
    * @deprecated Use {@link #setEnv(String, String)} or {@link #setEnv(byte[], byte[])} instead.
+   * @param env the environment
    * @see #setEnv(String, String)
    * @see #setEnv(byte[], byte[])
    */
@@ -121,7 +122,7 @@ class ChannelSession extends Channel{
    * Allocate a Pseudo-Terminal.
    * Refer to RFC4254 6.2. Requesting a Pseudo-Terminal.
    *
-   * @param enable
+   * @param enable flag
    */
   public void setPty(boolean enable){ 
     pty=enable; 
@@ -130,7 +131,7 @@ class ChannelSession extends Channel{
   /**
    * Set the terminal mode.
    * 
-   * @param terminal_mode
+   * @param terminal_mode the new terminal mode
    */
   public void setTerminalMode(byte[] terminal_mode){
     this.terminal_mode=terminal_mode;

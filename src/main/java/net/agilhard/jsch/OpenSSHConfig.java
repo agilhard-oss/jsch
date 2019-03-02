@@ -74,6 +74,7 @@ public class OpenSSHConfig implements ConfigRepository {
    * Parses the given string, and returns an instance of ConfigRepository.
    *
    * @param conf string, which includes OpenSSH's config
+   * @throws IOException on I/O Error
    * @return an instanceof OpenSSHConfig
    */
   public static OpenSSHConfig parse(String conf) throws IOException {
@@ -90,6 +91,7 @@ public class OpenSSHConfig implements ConfigRepository {
    * Parses the given file, and returns an instance of ConfigRepository.
    *
    * @param file OpenSSH's config file
+   * @throws IOException on I/O Error
    * @return an instanceof OpenSSHConfig
    */
   public static OpenSSHConfig parseFile(String file) throws IOException {

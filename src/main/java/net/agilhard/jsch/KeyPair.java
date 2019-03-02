@@ -197,6 +197,8 @@ public abstract class KeyPair{
    * @param name file name
    * @param comment comment
    * @see #writePublicKey(java.io.OutputStream out, String comment)
+   * @throws java.io.FileNotFoundException if file was not found
+   * @throws java.io.IOException on I/O error
    */
   public void writePublicKey(String name, String comment) throws java.io.FileNotFoundException, java.io.IOException{
     FileOutputStream fos=new FileOutputStream(name);
@@ -235,7 +237,8 @@ public abstract class KeyPair{
    * @param name file name
    * @param comment comment
    * @see #writeSECSHPublicKey(java.io.OutputStream out, String comment)
-   */
+   * @throws java.io.FileNotFoundException if file was not found
+   * @throws java.io.IOException on I/O error   */
   public void writeSECSHPublicKey(String name, String comment) throws java.io.FileNotFoundException, java.io.IOException{
     FileOutputStream fos=new FileOutputStream(name);
     writeSECSHPublicKey(fos, comment);
@@ -246,7 +249,8 @@ public abstract class KeyPair{
    * Writes the plain private key to the file.
    * @param name file name
    * @see #writePrivateKey(String name,  byte[] passphrase)
-   */
+   * @throws java.io.FileNotFoundException if file was not found
+   * @throws java.io.IOException on I/O error   */
   public void writePrivateKey(String name) throws java.io.FileNotFoundException, java.io.IOException{
     this.writePrivateKey(name, null);
   }
@@ -256,7 +260,8 @@ public abstract class KeyPair{
    * @param name file name
    * @param passphrase a passphrase to encrypt the private key
    * @see #writePrivateKey(java.io.OutputStream out,  byte[] passphrase)
-   */
+   * @throws java.io.FileNotFoundException if file was not found
+   * @throws java.io.IOException on I/O error   */
   public void writePrivateKey(String name, byte[] passphrase) throws java.io.FileNotFoundException, java.io.IOException{
     FileOutputStream fos=new FileOutputStream(name);
     writePrivateKey(fos, passphrase);
@@ -474,6 +479,7 @@ public abstract class KeyPair{
 
   /**
    * @deprecated use #writePrivateKey(java.io.OutputStream out, byte[] passphrase)
+   * @param passphrase the passphrase
    */
   public void setPassphrase(String passphrase){
     if(passphrase==null || passphrase.length()==0){
@@ -486,6 +492,7 @@ public abstract class KeyPair{
 
   /**
    * @deprecated use #writePrivateKey(String name, byte[] passphrase)
+   * @param passphrase the passphrase
    */
   public void setPassphrase(byte[] passphrase){
     if(passphrase!=null && passphrase.length==0) 

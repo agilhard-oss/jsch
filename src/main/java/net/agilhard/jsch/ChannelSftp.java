@@ -190,6 +190,7 @@ public class ChannelSftp extends ChannelSession{
    * increase memory usage.  The default is 16 requests.
    *
    * @param bulk_requests how many requests may be outstanding at any one time.
+   * @throws JSchException on invalid parameter 
    */
   public void setBulkRequests(int bulk_requests) throws JSchException {
     if(bulk_requests>0) 
@@ -381,6 +382,7 @@ public class ChannelSftp extends ChannelSession{
    * @param dst destination file
    * @param monitor progress monitor
    * @param mode how data should be added to dst
+   * @throws SftpException on error
    */
   public void put(String src, String dst, 
 		  SftpProgressMonitor monitor, int mode) throws SftpException{
@@ -508,6 +510,7 @@ public class ChannelSftp extends ChannelSession{
    * @param dst destination file
    * @param monitor progress monitor
    * @param mode how data should be added to dst
+   * @throws SftpException on error
    */
   public void put(InputStream src, String dst, 
 		  SftpProgressMonitor monitor, int mode) throws SftpException{
@@ -718,6 +721,7 @@ public class ChannelSftp extends ChannelSession{
    * @param monitor progress monitor
    * @param mode how data should be added to dst
    * @param offset data will be added at offset
+   * @throws SftpException on error
    * @return output stream, which accepts data to be transferred.
    */
   public OutputStream put(String dst, final SftpProgressMonitor monitor, final int mode, long offset) throws SftpException{
@@ -1295,12 +1299,21 @@ public class ChannelSftp extends ChannelSession{
 
   /**
    * @deprecated  This method will be deleted in the future.
+   * @param src the src
+   * @param mode the mode
+   * @throws SftpException on error
+   * @return a InputStream
    */
   public InputStream get(String src, int mode) throws SftpException{
     return get(src, null, 0L);
   }
   /**
    * @deprecated  This method will be deleted in the future.
+   * @param src the src
+   * @param monitor the monitor
+   * @param mode the mode
+   * @throws SftpException on error
+   * @return a InputStream
    */
   public InputStream get(String src, final SftpProgressMonitor monitor, final int mode) throws SftpException{
     return get(src, monitor, 0L);
@@ -1560,6 +1573,10 @@ public class ChannelSftp extends ChannelSession{
    * <code>LsEntrySelector#select(LsEntry)</code> method, and if that method
    * returns <code>LsEntrySelector#BREAK</code>, the operation will be
    * canceled immediately.
+   *
+   * @param path the path
+   * @param selector the selector
+   * @throws SftpException on error
    *
    * @see ChannelSftp.LsEntrySelector
    * @since 0.1.47

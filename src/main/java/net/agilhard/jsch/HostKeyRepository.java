@@ -37,6 +37,9 @@ public interface HostKeyRepository{
   /**
    * Checks if <code>host</code> is included with the <code>key</code>. 
    * 
+   * 
+   * @param host the host
+   * @param key the key
    * @return #NOT_INCLUDED, #OK or #CHANGED
    * @see #NOT_INCLUDED
    * @see #OK
@@ -57,6 +60,9 @@ public interface HostKeyRepository{
    * Removes a host key if there exists mached key with
    * <code>host</code>, <code>type</code>.
    *
+   * @param host the host
+   * @param type the type
+   *
    * @see #remove(String host, String type, byte[] key)
    */
   void remove(String host, String type);
@@ -64,6 +70,9 @@ public interface HostKeyRepository{
   /**
    * Removes a host key if there exists a matched key with
    * <code>host</code>, <code>type</code> and <code>key</code>.
+   * @param host the host
+   * @param type the type
+   * @param key the key
    */
   void remove(String host, String type, byte[] key);
 
@@ -77,6 +86,7 @@ public interface HostKeyRepository{
   /**
    * Retuns a list for host keys managed in this repository.
    *
+   * @return the HostKey
    * @see #getHostKey(String host, String type)
    */
   HostKey[] getHostKey();
@@ -89,6 +99,8 @@ public interface HostKeyRepository{
    * @param type a key type used in searching host keys,
    *        and it should be "ssh-dss" or "ssh-rsa".
    *        If <code>null</code> is given, a key type type will not be ignored.
+   *        
+   * @return array of HostKeys
    */
   HostKey[] getHostKey(String host, String type);
 }

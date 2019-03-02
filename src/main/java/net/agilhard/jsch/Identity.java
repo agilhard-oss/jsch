@@ -34,8 +34,9 @@ public interface Identity{
   /**
    * Decrypts this identity with the specified pass-phrase.
    * @param passphrase the pass-phrase for this identity.
-   * @return <tt>true</tt> if the decryption is succeeded
+   * @return <code>true</code> if the decryption is succeeded
    * or this identity is not cyphered.
+   * @throws JSchException on error
    */
   public boolean setPassphrase(byte[] passphrase) throws JSchException;
 
@@ -55,6 +56,7 @@ public interface Identity{
   /**
    * @deprecated The decryption should be done automatically in #setPassphase(byte[] passphrase)
    * @see #setPassphrase(byte[] passphrase)
+   * @return success flag
    */
   public boolean decrypt();
 
@@ -67,12 +69,13 @@ public interface Identity{
   /**
    * Returns the name of this identity. 
    * It will be useful to identify this object in the {@link IdentityRepository}.
+   * @return the name
    */
   public String getName();
 
   /**
-   * Returns <tt>true</tt> if this identity is cyphered.
-   * @return <tt>true</tt> if this identity is cyphered.
+   * Returns <code>true</code> if this identity is cyphered.
+   * @return <code>true</code> if this identity is cyphered.
    */
   public boolean isEncrypted();
 
